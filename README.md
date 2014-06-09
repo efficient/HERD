@@ -11,8 +11,8 @@ This version of HERD has been tested for the following configuration:
 		* I suggest using the MLNX_OFED version for Ubuntu 12.04.
 	* ConnectX3 353A, 354A, and 313A (RoCE)
 
-****************************************************************************
 Initial setup:
+====
 
 1. The HERD folder should be a subdir in your home directory. This is required 
 by the bash scripts. Create this folder on the server machine and mount it at
@@ -25,10 +25,10 @@ all clients via NFS.
 4. Create hugepages at the server machine. Use the hugepage-create.sh script
 in the scripts folder. I suggest creating 4096 hugepages on each socket.
 
-*****************************************************************************
 Quick start:
+====
 
-1. I assume that the machines are named: node-$i.RDMA.fawn.apt.emulab.net.
+1. I assume that the machines are named: node-$i.RDMA.fawn.apt.emulab.net starting from i = 1.
 		The experiment requires at least (1 + (NUM_CLIENTS / num_processes)) machines.
 		NUM_CLIENTS is the total number of client processes, defined in common.h.
 		num_processes is the number of client processes per machine, defined in
@@ -36,7 +36,7 @@ Quick start:
 
 2. Run make (or do.sh) at every machine build the executables
 
-3. Run ./run-servers.sh at node-0. The script will ssh into all the client machines
+3. Run ./run-servers.sh at node-1. The script will ssh into all the client machines
 (NUM_CLIENT_MACHINES in number) and run the run_machine.sh script.
 
 4. If you do not want to run clients automatically from the server, delete the 
@@ -55,8 +55,8 @@ client processes remotely, run bomb.sh at the server machine.
 
 
 
-*******************************************************************************
 Algorithm details:
+====
 
 SERVER's ALGORITHM (one iteration)
 
@@ -90,7 +90,7 @@ request is detected in (1), len == 0 means that the request is a
 GET, otherwise it's a PUT.
 
 ----------------------------------------------------------------
-OUTSTANDING REQUETS/ RESPONSES:
+OUTSTANDING REQUESTS / RESPONSES:
 
 The number of outstanding responses from a server is WS_SERVER.
 A server polls for SEND completions once per WS_SERVER SENDs.
