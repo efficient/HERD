@@ -45,8 +45,12 @@ Quick start:
 
 * Run `make` on every machine to build the executables
 
-* Run `run-servers.sh` at node-1. The script will ssh into all the client machines
-(`NUM_CLIENT_MACHINES` in number) and run the `run_machine.sh` script.
+* To run the clients automatically along with the server:
+
+```bash	
+# At node-1 (server)
+./run-server.sh
+```
 
 * If you do not want to run clients automatically from the server, delete the 
 2nd loop from `run-servers.sh`. Then:
