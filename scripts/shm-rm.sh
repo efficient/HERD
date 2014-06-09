@@ -1,4 +1,5 @@
-for i in `seq 0 64`; do
-	sudo ipcrm -M $i 2>/dev/null
+for i in `seq 0 64`; do		# Lossy index and circular log
+	sudo ipcrm -M $i
 done
-sudo ipcrm -M 3185 2>/dev/null		#Request area shm key
+sudo ipcrm -M 3185			# Request region at server
+sudo ipcrm -M 3186			# Response region at server

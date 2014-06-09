@@ -291,7 +291,7 @@ void post_recv(struct ctrl_blk *cb, int iter_, int sn)
 	};
 
 	// This does not use the wr in cb - avoids interference
-	// with the write to server
+	// with the WRITE to server
 	struct ibv_recv_wr recv_wr = {
 		.sg_list    = &list,
 		.num_sge    = 1,

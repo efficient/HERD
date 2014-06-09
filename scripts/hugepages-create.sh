@@ -1,7 +1,8 @@
-# We need 1GB log + 256 MB index for each server. This is 512 + 128 hugepages
-# per server. This is 5120 hugepages.
+if [ "$#" -ne 2 ]; then
+    echo "Illegal number of parameters"
+	echo "Usage: ./hugepages-create.sh <socket-id> <number of hugepages>"
+	exit
+fi
 
-#sudo numactl echo 0 > /proc/sys/vm/nr_hugepages_mempolicy
-#sudo numactl echo 8192 > /proc/sys/vm/nr_hugepages_mempolicy
-
-sudo sysctl -w vm.nr_hugepages=$@
+echo "Creating $2 hugepages on socket $1"
+echo $2 > /sys/devices/system/node/node$1/hugepages/hugepages-2048kB/nr_hugepages

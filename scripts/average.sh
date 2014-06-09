@@ -5,7 +5,7 @@ total_sum=0
 total_files=0
 for file in $DIR/*; do
 	echo "Processing file $file"
-	tail -20 $file >> temp
+	tail -5 $file >> temp
 	total_files=`expr $total_files + 1`
 done
 

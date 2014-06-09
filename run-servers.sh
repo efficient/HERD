@@ -3,13 +3,13 @@
 #	2. ssh into client machines and run the run-machine.sh script
 
 shm-rm.sh				# Remove hugepages
-export ROCE=0
+export ROCE=0			# Don't use RoCE on Apt
 export APT=1
 
 NUM_SERVERS=7			# Number of server processes on the server machine	
 NUM_CLIENT_MACHINES=12	# Number of client machines
 
-rm -rf client-tput
+rm -rf client-tput		# Re-create a folder for clients to write their stuff into
 mkdir client-tput
 
 for i in `seq 1 $NUM_SERVERS`; do
