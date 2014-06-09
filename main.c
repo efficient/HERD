@@ -309,7 +309,7 @@ void run_client(struct ctrl_blk *cb)
 	struct ibv_send_wr *bad_send_wr;
 	struct ibv_wc wc[WS_SERVER];
 	
-	struct timespec start, end;		//Sampled once every ITERS_PER_MEASUREMENT
+	struct timespec start, end;
 	struct timespec op_start[WINDOW_SIZE], op_end[WINDOW_SIZE];
 	uint64_t fastrand_seed = 0xdeadbeef;
 	LL total_nsec = 0;
@@ -494,8 +494,8 @@ void run_client(struct ctrl_blk *cb)
 }
 
 /* Usage:
- * Server: ./rc_pingpong <sock_port> <id>
- * Client: ./rc_pingpong <sock_port> <id> <server_ib0_ip>
+ * Server: sudo ./main <sock_port> <id>
+ * Client: sudo ./maun <sock_port> <id> <server_ip>
  */ 
 int main(int argc, char *argv[])
 {

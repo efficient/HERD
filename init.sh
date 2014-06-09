@@ -8,5 +8,5 @@ sudo sysctl -p /etc/sysctl.conf
 
 # If you want to generate the zipf workloads at the client machines, uncomment:
 ## for i in `seq 2 30`; do
-## 	ssh node-$i.RDMA.fawn.apt.emulab.net "cd ~/pingpong/YCSB/src; ./gen-zipf.sh" &
+## 	ssh node-$i.RDMA.fawn.apt.emulab.net "cd ~/HERD/YCSB/src; ./gen-zipf.sh" &
 ## done
