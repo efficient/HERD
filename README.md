@@ -30,6 +30,7 @@ Initial setup:
 
   * Make sure that ports 5500 to 5515 are available on the server machine.
 
+* Execute the following commands:
 ```bash
 cd ~
 git clone https://github.com/anujkaliaiitd/HERD.git
