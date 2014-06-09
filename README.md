@@ -59,7 +59,7 @@ client processes remotely, run `bomb.sh` at the server machine.
 
 
 
-
+<!---
 Algorithm details:
 ====
 
@@ -109,3 +109,4 @@ SEND completions.
 
 The client uses parameters CL_BTCH_SZ and CL_SEMI_BTCH_SZ to post
 RECV batches.
+--->
