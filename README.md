@@ -35,11 +35,12 @@ Quick start:
 
 * I assume that the machines are named: `node-i.RDMA.fawn.apt.emulab.net` starting from i = 1.
   * The experiment requires at least `(1 + (NUM_CLIENTS / num_processes))` machines.
+	`node-1` is the server machine.
   	`NUM_CLIENTS` is the total number of client processes, defined in `common.h`.
 	`num_processes` is the number of client processes per machine, defined in
 	`run-machine.sh`.
 
-* Run `make` (or `do.sh`) at every machine build the executables
+* Run `make` on every machine to build the executables
 
 * Run `run-servers.sh` at node-1. The script will ssh into all the client machines
 (`NUM_CLIENT_MACHINES` in number) and run the `run_machine.sh` script.
