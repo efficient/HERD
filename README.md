@@ -33,7 +33,7 @@ in the `scripts` folder. I suggest creating 4096 hugepages on each socket.
 Quick start:
 -----------
 
-* I assume that the machines are named: `node-i.RDMA.fawn.apt.emulab.net` starting from i = 1.
+* I assume that the machines are named: `node-i.RDMA.fawn.apt.emulab.net` starting from `i = 1`.
   * The experiment requires at least `(1 + (NUM_CLIENTS / num_processes))` machines.
 	`node-1` is the server machine.
   	`NUM_CLIENTS` is the total number of client processes, defined in `common.h`.
