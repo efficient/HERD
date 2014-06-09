@@ -20,9 +20,15 @@ all clients via NFS.
 2. Add the `scripts` folder to your `PATH`.
 
 3. Increase the `shmmax` and `shmall` parameters to very large values by running `init.sh`.
+	* Default values on most Linux systems is 32 MB, which is not enough for HERD's
+	MICA hash-index and circular-log.
 
-4. Create hugepages at the server machine. Use the `hugepage-create.sh` script
+4. Create hugepages at the server machine. Use the `hugepages-create.sh` script
 in the `scripts` folder. I suggest creating 4096 hugepages on each socket.
+	```bash
+	# To create 4096 hugepages on socket 0
+	$ hugepages-create.sh 0 4096
+	```
 
 Quick start:
 -----------
