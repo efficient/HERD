@@ -17,7 +17,7 @@ This version of HERD has been tested for the following configuration:
 Initial setup:
 -------------
 
-1. I assume that the machines are named: `node-i.RDMA.fawn.apt.emulab.net` starting from `i = 1`.
+* I assume that the machines are named: `node-i.RDMA.fawn.apt.emulab.net` starting from `i = 1`.
   * The experiment requires at least `(1 + (NUM_CLIENTS / num_processes))` machines.
 	`node-1` is the server machine.
   	`NUM_CLIENTS` is the total number of client processes, defined in `common.h`.
@@ -31,15 +31,15 @@ Initial setup:
   * Make sure that ports 5500 to 5515
 	are available on the server machine.
 
-2. The HERD folder should be a subdir in your home directory. This is required 
+* The HERD folder should be a subdir in your home directory. This is required 
 by the bash scripts. Create this folder on the server machine and mount it at
 all clients via NFS.
 
-3. Add the `scripts` folder to your `PATH`.
+* Add the `scripts` folder to your `PATH`.
 
-4. Increase the `shmmax` and `shmall` parameters to very large values by running `init.sh`.
+* Increase the `shmmax` and `shmall` parameters to very large values by running `init.sh`.
 
-5. Create hugepages at the server machine. Use the `hugepages-create.sh` script
+* Create hugepages at the server machine. Use the `hugepages-create.sh` script
 in the `scripts` folder. I suggest creating 4096 hugepages on each socket.
 	```bash
 	# To create 4096 hugepages on socket 0
