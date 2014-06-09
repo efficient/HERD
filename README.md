@@ -23,7 +23,13 @@ Initial setup:
   	`NUM_CLIENTS` is the total number of client processes, defined in `common.h`.
 	`num_processes` is the number of client processes per machine, defined in
 	`run-machine.sh`.
-  * To modify the code for your machine names, change the machine names in `bomb.sh` and `run-servers.sh`.
+  * To modify HERD for your machine names: 
+    * Make appropriate changes in `bomb.sh` and `run-servers.sh`.
+	* Change the server's machine name in the `servers` file. Clients use this file to
+	  connect to server processes.
+
+  * Make sure that ports 5500 to 5515
+	are available on the server machine.
 
 2. The HERD folder should be a subdir in your home directory. This is required 
 by the bash scripts. Create this folder on the server machine and mount it at
