@@ -1,0 +1,62 @@
+At client 26, server_name = node-1.RDMA.fawn.apt.emulab.net, port = 5500
+At client 26, server_name = node-1.RDMA.fawn.apt.emulab.net, port = 5501
+At client 26, server_name = node-1.RDMA.fawn.apt.emulab.net, port = 5502
+At client 26, server_name = node-1.RDMA.fawn.apt.emulab.net, port = 5503
+At client 26, server_name = node-1.RDMA.fawn.apt.emulab.net, port = 5504
+At client 26, server_name = node-1.RDMA.fawn.apt.emulab.net, port = 5505
+At client 26, server_name = node-1.RDMA.fawn.apt.emulab.net, port = 5506
+90180
+Local address of dgram QP: 3	100 210 13581016
+Local address of dgram QP: 4	100 211 7659147
+Local address of dgram QP: 5	100 212 14717211
+Local address of dgram QP: 6	100 213 2880556
+Client 26 <-- Server 0's stag: 	139765682798592, 3758165248, 50400
+Client 26 --> Server 0 conn qp_attr: 	100 200 8858494
+Client 26 <-- Server 0's conn qp_attr: 	156 1002 4815274
+Client 26 --> Server 0 UD qp_attr: 	100 207 12897790
+Client 26 <-- Server 1's stag: 	139759286484992, 3758165760, 50400
+Client 26 --> Server 1 conn qp_attr: 	100 201 9446032
+Client 26 <-- Server 1's conn qp_attr: 	156 1039 13656338
+Client 26 --> Server 1 UD qp_attr: 	100 208 13943498
+Client 26 <-- Server 2's stag: 	140403162480640, 3758166272, 50400
+Client 26 --> Server 2 conn qp_attr: 	100 202 10328218
+Client 26 <-- Server 2's conn qp_attr: 	156 1076 2358292
+Client 26 --> Server 2 UD qp_attr: 	100 209 9890180
+Client 26 <-- Server 3's stag: 	140386966175744, 3758166784, 50400
+Client 26 --> Server 3 conn qp_attr: 	100 203 5436641
+Client 26 <-- Server 3's conn qp_attr: 	156 1113 7837461
+Client 26 --> Server 3 UD qp_attr: 	100 210 13581016
+Client 26 <-- Server 4's stag: 	140559922495488, 3758167296, 50400
+Client 26 --> Server 4 conn qp_attr: 	100 204 3284960
+Client 26 <-- Server 4's conn qp_attr: 	156 1150 13316631
+Client 26 --> Server 4 UD qp_attr: 	100 211 7659147
+Client 26 <-- Server 5's stag: 	140013511639040, 3758167808, 50400
+Client 26 --> Server 5 conn qp_attr: 	100 205 1255362
+Client 26 <-- Server 5's conn qp_attr: 	156 1187 2018584
+Client 26 --> Server 5 UD qp_attr: 	100 212 14717211
+Client 26 <-- Server 6's stag: 	140224296386560, 3758168320, 50400
+Client 26 --> Server 6 conn qp_attr: 	100 206 10615545
+Client 26 <-- Server 6's conn qp_attr: 	156 1224 7497754
+Client 26 --> Server 6 UD qp_attr: 	100 213 2880556
+Starting client 26
+Wait for iter 962800 at client 26 GET = 0
+
+Client 26 completed 1048575 ops
+IOPS = 289233.971414
+Average op time = 13.608042 us
+Avg wait = 130.449210, avg fail = 0.000000
+
+Client 26 completed 2097151 ops
+IOPS = 747947.699664
+Average op time = 5.216299 us
+Avg wait = 28.206324, avg fail = 0.572867
+
+Client 26 completed 3145727 ops
+IOPS = 779388.230544
+Average op time = 5.030140 us
+Avg wait = 43.823923, avg fail = 0.591413
+
+Client 26 completed 4194303 ops
+IOPS = 779402.529229
+Average op time = 5.030002 us
+Avg wait = 43.855887, avg fail = 0.603812
