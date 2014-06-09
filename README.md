@@ -28,23 +28,18 @@ Initial setup:
 	* Change the server's machine name in the `servers` file. Clients use this file to
 	  connect to server processes.
 
-  * Make sure that ports 5500 to 5515
-	are available on the server machine.
+  * Make sure that ports 5500 to 5515 are available on the server machine.
 
-* The HERD folder should be located in your home directory. This is required 
-by the bash scripts. Create this folder on the server machine and mount it at
-all clients via NFS.
+```bash
+cd ~
+git clone https://github.com/anujkaliaiitd/HERD.git
+export PATH=~/HERD/scripts:$PATH
+cd HERD
+sudo ./init.sh	# Increase shmmax and shmall
+sudo hugepages-create.sh 0 4096		# Create hugepages on socket 0. Do for all sockets.
+```
 
-* Add the `scripts` folder to your `PATH`.
-
-* Increase the `shmmax` and `shmall` parameters to very large values by running `init.sh`.
-
-* Create hugepages at the server machine. Use the `hugepages-create.sh` script
-in the `scripts` folder. I suggest creating 4096 hugepages on each socket.
-	```bash
-	# To create 4096 hugepages on socket 0
-	$ hugepages-create.sh 0 4096
-	```
+* Create the HERD folder only on the server machine and mount it at all clients via NFS.
 
 Quick start:
 -----------
