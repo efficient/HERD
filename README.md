@@ -31,7 +31,7 @@ Initial setup:
   * Make sure that ports 5500 to 5515
 	are available on the server machine.
 
-* The HERD folder should be a subdir in your home directory. This is required 
+* The HERD folder should be located in your home directory. This is required 
 by the bash scripts. Create this folder on the server machine and mount it at
 all clients via NFS.
 
