@@ -1,6 +1,9 @@
 HERD
+====
 
-A lot of code here has been derived from the perftest benchmarks.
+A Highly Efficient key-value system based for RDMA
+
+Disclaimer:A lot of code here has been derived from the perftest benchmarks.
 
 This version of HERD has been tested for the following configuration:
 	* Ubuntu 12.04 (kernel 3.2.0)
