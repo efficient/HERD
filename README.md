@@ -30,7 +30,7 @@ Initial setup:
 
   * Make sure that ports 5500 to 5515 are available on the server machine.
 
-* Execute the following commands:
+* Execute the following commands at the server machine:
 ```bash
 cd ~
 git clone https://github.com/anujkaliaiitd/HERD.git
@@ -40,7 +40,7 @@ sudo ./init.sh	# Increase shmmax and shmall
 sudo hugepages-create.sh 0 4096		# Create hugepages on socket 0. Do for all sockets.
 ```
 
-* Create the HERD folder only on the server machine and mount it at all clients via NFS.
+* Mount the HERD folder on all client machines via NFS.
 
 Quick start:
 -----------
