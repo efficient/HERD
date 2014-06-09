@@ -19,16 +19,16 @@ all clients via NFS.
 
 2. Add the `scripts` folder to your `PATH`.
 
-3. Increase the shmmax and shmall parameters to very large values by running init.sh
+3. Increase the `shmmax` and `shmall` parameters to very large values by running `init.sh`.
 
-4. Create hugepages at the server machine. Use the hugepage-create.sh script
-in the scripts folder. I suggest creating 4096 hugepages on each socket.
+4. Create hugepages at the server machine. Use the `hugepage-create.sh` script
+in the `scripts` folder. I suggest creating 4096 hugepages on each socket.
 
 Quick start:
 -----------
 
-1. I assume that the machines are named: node-$i.RDMA.fawn.apt.emulab.net starting from i = 1.
-		The experiment requires at least (1 + (NUM_CLIENTS / num_processes)) machines.
+1. I assume that the machines are named: `node-i.RDMA.fawn.apt.emulab.net` starting from i = 1.
+		The experiment requires at least `(1 + (NUM_CLIENTS / num_processes))` machines.
 		NUM_CLIENTS is the total number of client processes, defined in common.h.
 		num_processes is the number of client processes per machine, defined in
 		run-machine.sh.
