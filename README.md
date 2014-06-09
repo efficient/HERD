@@ -41,12 +41,12 @@ Quick start:
 4. If you do not want to run clients automatically from the server, delete the 
 2nd loop from `run-servers.sh`. Then:
 		
-	# At node-1:
-	$ ./run-server.sh
-	# At node-2:
-	$ ./run-machine.sh 0
-	# At node-i (i > 2):
-	$ ./run-machine.sh (i - 2)
+# At node-1:
+$ ./run-server.sh
+# At node-2:
+$ ./run-machine.sh 0
+# At node-i (i > 2):
+$ ./run-machine.sh (i - 2)
 
 5. To kill the server processes, run `kill.sh` at the server machine. To kill the 
 client processes remotely, run `bomb.sh` at the server machine.
