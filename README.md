@@ -28,7 +28,8 @@ Initial setup:
 	* Change the server's machine name in the `servers` file. Clients use this file to
 	  connect to server processes.
 
-  * Make sure that ports 5500 to 5515 are available on the server machine.
+  * Make sure that ports 5500 to 5515 are available on the server machine. Server process `i`
+	listens for clients on port `5500 + i`.
 
 * Execute the following commands at the server machine:
 ```bash
