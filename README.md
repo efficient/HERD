@@ -7,7 +7,7 @@ This version of HERD has been tested for the following configuration:
 
 1. Software
   * OS: Ubuntu 12.04 (kernel 3.2.0)
-  * RDMA drivers: `mlx4` from MLNX OFED 2.2 and 2.0. I suggest using the MLNX OFED version for Ubuntu 12.04.
+  * RDMA drivers: `mlx4` from MLNX OFED 2.2. I suggest using the MLNX OFED version for Ubuntu 12.04.
 2. Hardware
   * RNICs: 
     * ConnectX-3 353A (InfiniBand) with PCIe 2.0 x8
