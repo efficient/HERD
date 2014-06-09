@@ -45,7 +45,7 @@ sudo hugepages-create.sh 0 4096		# Create hugepages on socket 0. Do for all sock
 Quick start:
 -----------
 
-* Run `make` on every machine to build the executables
+* Run `make` on the server machine to build the executables.
 
 * To run the clients automatically along with the server:
 
