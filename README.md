@@ -31,18 +31,18 @@ in the `scripts` folder. I suggest creating 4096 hugepages on each socket.
 Quick start:
 -----------
 
-1. I assume that the machines are named: `node-i.RDMA.fawn.apt.emulab.net` starting from i = 1.
+ * I assume that the machines are named: `node-i.RDMA.fawn.apt.emulab.net` starting from i = 1.
 		The experiment requires at least `(1 + (NUM_CLIENTS / num_processes))` machines.
 		`NUM_CLIENTS` is the total number of client processes, defined in `common.h`.
 		`num_processes` is the number of client processes per machine, defined in
 		`run-machine.sh`.
 
-2. Run `make` (or `do.sh`) at every machine build the executables
+ * Run `make` (or `do.sh`) at every machine build the executables
 
-3. Run `run-servers.sh` at node-1. The script will ssh into all the client machines
+ * Run `run-servers.sh` at node-1. The script will ssh into all the client machines
 (`NUM_CLIENT_MACHINES` in number) and run the `run_machine.sh` script.
 
-4. If you do not want to run clients automatically from the server, delete the 
+ * If you do not want to run clients automatically from the server, delete the 
 2nd loop from `run-servers.sh`. Then:
 	
 ```bash	
@@ -54,7 +54,7 @@ Quick start:
 ./run-machine.sh (i - 2)
 ```
 
-5. To kill the server processes, run `kill.sh` at the server machine. To kill the 
+ * To kill the server processes, run `kill.sh` at the server machine. To kill the 
 client processes remotely, run `bomb.sh` at the server machine.
 
 
