@@ -8,7 +8,7 @@ Disclaimer:A lot of code here has been derived from the perftest benchmarks.
 This version of HERD has been tested for the following configuration:
  * Ubuntu 12.04 (kernel 3.2.0)
  * MLNX OFED 2.2 and 2.0. I suggest using the MLNX OFED version for Ubuntu 12.04.
- * ConnectX-3 353A, 354A, and 313A (RoCE)
+ * ConnectX-3 353A, 354A (InfiniBand), and 313A (RoCE)
 
 Initial setup:
 -------------
@@ -17,7 +17,7 @@ Initial setup:
 by the bash scripts. Create this folder on the server machine and mount it at
 all clients via NFS.
 
-2. Add the scripts folder to your PATH.
+2. Add the $scripts$ folder to your $PATH$.
 
 3. Increase the shmmax and shmall parameters to very large values by running init.sh
 
