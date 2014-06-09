@@ -1,24 +1,41 @@
-Ib-KV
-Author: Anuj Kalia
+HERD
 
-At server:
-	1. Run ./init.sh
-		- Increases the kernel SHMMAX and SHMALL parameters.
-		- Configures the ib addresses of all nodes.
-			* The server gets 10.0.0.50
-			* The clients get 10.0.0.51 through 10.0.0.(50 + NUM_CLIENTS)
+A lot of code has been copied from the perftest benchmarks.
 
-	2. Create hugepages
-		- The scripts folder contains a hugepages-create.sh script
-		- Run hugepage-create.sh 8192 for 16 GB worth of hugepages
+This version of HERD has been tested for the following configuration:
+	* Ubuntu 12.04 (kernel 3.2.0)
+	* MLNX OFED 2.2 and 2.0
+		* I suggest using the MLNX_OFED version for Ubuntu 12.04.
+	* ConnectX3 353A, 354A, and 313A (RoCE)
 
-At clients:
-	- Not much is needed. After running the server using ./run-servers.sh,
-	execute ./run-clients.sh [0 through (NUM_CLIENT_MACHINES - 1)] at each 
-	client machine
+Initial setup:
+	* Increase the shmmax and shmall parameters by running init.sh
+	* Create hugepages at the server machine. Use the hugepage-create.sh script
+	  in the scripts folder.
 
+Quick start:
+	* I assume that the machines are named: node-$i.RDMA.fawn.apt.emulab.net.
+		* The experiment requires at least (1 + NUM_CLIENTS / num_processes) nodes.
+		  NUM_CLIENTS is the total number of client processes, defined in common.h.
+		  num_processes is the number of client processes per machine, defined in
+		  run-machine.sh.
 
-Details:
+	* Run make (or do.sh) at every machine build the executables
+
+	* Run ./run-servers.sh at node-0. The script will ssh into all the client machines
+	  (NUM_CLIENT_MACHINES in number) and run the run_machine.sh script.
+
+	* If you do not want to run clients automatically from the server, delete
+	  the 2nd loop from run-servers.sh. Then:
+			* At the server: ./run-server.sh
+			* At clients: ./run-machine.sh 0
+						  ./run-machine.sh 1
+						  ...
+
+	* To kill the server processes, run kill.sh at the server machine.
+	* To kill the client processes, run bomb.sh at the server machine.
+
+Algorithm details:
 
 SERVER's ALGORITHM (one iteration)
 
