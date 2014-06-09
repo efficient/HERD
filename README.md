@@ -29,27 +29,27 @@ Quick start:
 
 1. I assume that the machines are named: `node-i.RDMA.fawn.apt.emulab.net` starting from i = 1.
 		The experiment requires at least `(1 + (NUM_CLIENTS / num_processes))` machines.
-		NUM_CLIENTS is the total number of client processes, defined in common.h.
-		num_processes is the number of client processes per machine, defined in
-		run-machine.sh.
+		`NUM_CLIENTS` is the total number of client processes, defined in `common.h`.
+		`num_processes` is the number of client processes per machine, defined in
+		`run-machine.sh`.
 
-2. Run make (or do.sh) at every machine build the executables
+2. Run `make` (or `do.sh`) at every machine build the executables
 
-3. Run ./run-servers.sh at node-1. The script will ssh into all the client machines
-(NUM_CLIENT_MACHINES in number) and run the run_machine.sh script.
+3. Run `run-servers.sh` at node-1. The script will ssh into all the client machines
+(`NUM_CLIENT_MACHINES` in number) and run the `run_machine.sh` script.
 
 4. If you do not want to run clients automatically from the server, delete the 
-2nd loop from run-servers.sh. Then:
-		At the server:		./run-server.sh
-		At clients:			./run-machine.sh 0
-							./run-machine.sh 1
-							...
+2nd loop from `run-servers.sh`. Then:
+		
+	# At node-1:
+	$ ./run-server.sh
+	# At node-2:
+	$ ./run-machine.sh 0
+	# At node-i (i > 2):
+	$ ./run-machine.sh (i - 2)
 
-5. To kill the server processes, run kill.sh at the server machine. To kill the 
-client processes remotely, run bomb.sh at the server machine.
-
-
-
+5. To kill the server processes, run `kill.sh` at the server machine. To kill the 
+client processes remotely, run `bomb.sh` at the server machine.
 
 
 
