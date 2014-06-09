@@ -17,7 +17,7 @@ Initial setup:
 by the bash scripts. Create this folder on the server machine and mount it at
 all clients via NFS.
 
-2. Add the $scripts$ folder to your $PATH$.
+2. Add the `scripts` folder to your `PATH`.
 
 3. Increase the shmmax and shmall parameters to very large values by running init.sh
 
