@@ -6,13 +6,12 @@ A Highly Efficient key-value system based for RDMA
 Disclaimer:A lot of code here has been derived from the perftest benchmarks.
 
 This version of HERD has been tested for the following configuration:
-	* Ubuntu 12.04 (kernel 3.2.0)
-	* MLNX OFED 2.2 and 2.0
-		* I suggest using the MLNX_OFED version for Ubuntu 12.04.
-	* ConnectX3 353A, 354A, and 313A (RoCE)
+ * Ubuntu 12.04 (kernel 3.2.0)
+ * MLNX OFED 2.2 and 2.0. I suggest using the MLNX OFED version for Ubuntu 12.04.
+ * ConnectX-3 353A, 354A, and 313A (RoCE)
 
 Initial setup:
-====
+-------------
 
 1. The HERD folder should be a subdir in your home directory. This is required 
 by the bash scripts. Create this folder on the server machine and mount it at
@@ -26,7 +25,7 @@ all clients via NFS.
 in the scripts folder. I suggest creating 4096 hugepages on each socket.
 
 Quick start:
-====
+-----------
 
 1. I assume that the machines are named: node-$i.RDMA.fawn.apt.emulab.net starting from i = 1.
 		The experiment requires at least (1 + (NUM_CLIENTS / num_processes)) machines.
@@ -89,8 +88,8 @@ clients do not WRITE to the len field for GETs. So, when a new
 request is detected in (1), len == 0 means that the request is a
 GET, otherwise it's a PUT.
 
-----------------------------------------------------------------
 OUTSTANDING REQUESTS / RESPONSES:
+----
 
 The number of outstanding responses from a server is WS_SERVER.
 A server polls for SEND completions once per WS_SERVER SENDs.
