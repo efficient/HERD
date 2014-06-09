@@ -4,9 +4,12 @@ HERD
 A Highly Efficient key-value system for RDMA
 
 This version of HERD has been tested for the following configuration:
+1. Software
  * Ubuntu 12.04 (kernel 3.2.0)
  * MLNX OFED 2.2 and 2.0. I suggest using the MLNX OFED version for Ubuntu 12.04.
- * ConnectX-3 353A, 354A (InfiniBand), and 313A (RoCE)
+2. Hardware
+ * Xeon E5-2450, Opteron 6272
+ * ConnectX-3 353A, 354A (InfiniBand), and ConnectX-3 313A (RoCE)
 
 Initial setup:
 -------------
