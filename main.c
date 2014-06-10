@@ -4,7 +4,7 @@ long long log_head = 0;
 long long tot_pipelined = 0;
 struct PL_IT *pipeline_out;
 
-// Create protection domain. Create queue pairs and modify them to init.
+// Create protection domain. Create queue pairs and modify them to INIT.
 static struct ctrl_blk *init_ctx(struct ctrl_blk *ctx, 
 	struct ibv_device *ib_dev)
 {
@@ -547,7 +547,7 @@ int main(int argc, char *argv[])
 	ib_dev = dev_list[is_roce() == 1 ? 1 : 0];
 	CPE(!ib_dev, "IB device not found", 0);
 
-	// Create queue pairs and modify them to init
+	// Create queue pairs and modify them to INIT
 	init_ctx(ctx, ib_dev);
 	CPE(!ctx, "Init ctx failed", 0);
 
