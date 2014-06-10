@@ -33,7 +33,7 @@ void process_pipeline(struct ctrl_blk *cb)
 		int req_type = pipeline[ind].req_type;
 
 		if(req_type == DUMMY_TYPE || req_type == EMPTY_TYPE) {
-			if(k == 2) {		//Output the dummy pipeline item
+			if(k == 2) {		// Output the dummy pipeline item
 				pipeline_out = &pipeline[ind];
 			}
 			continue;
@@ -72,19 +72,19 @@ void process_pipeline(struct ctrl_blk *cb)
 						max_diff = log_head - log_offset;
 						best_slot = slot;
 					}
-					//While insertion, we remove collisions.
+					// While insertion, we remove collisions.
 					int slot_tag = SLOT_TO_TAG(key_bkt[slot]);
 					if(slot_tag == key_tag) {
 						key_bkt[slot] = INVALID_SLOT;
 					}
 				}
 
-				//Prepare the slot. Assuming that log_head is less than 2^48,
-				//the offset stored in the slot is in [0, 2^48). 
+				// Prepare the slot. Assuming that log_head is less than 2^48,
+				// the offset stored in the slot is in [0, 2^48). 
 				key_bkt[best_slot] = key_tag;
 				key_bkt[best_slot] |= (log_head << 16);
 			
-				//Append to log
+				// Append to log
 				memcpy(&ht_log[log_head & LOG_SIZE_], pipeline[ind].kv, S_KV);
 				log_head += S_KV;
 			} else {	/*GET*/
@@ -107,9 +107,9 @@ void process_pipeline(struct ctrl_blk *cb)
 					server_resp_area[ras].len = GET_FAIL_LEN_1;
 				}
 			}
-		}	//END 1st pipeline stage
+		}	// END 1st pipeline stage
 		if(k == 2) {
-			if(req_type == GET_TYPE) {		//GET
+			if(req_type == GET_TYPE) {		// GET
 				int slot = pipeline[ind].get_slot;
 				int key_still_in_index = 0, key_in_log = 0;
 
@@ -138,7 +138,7 @@ void process_pipeline(struct ctrl_blk *cb)
 			}
 			pipeline_out = &pipeline[ind];
 		}
-		key[KEY_SIZE - 1] = 0;	//Zero out polled value again
+		key[KEY_SIZE - 1] = 0;	// Zero out polled value again
 	}
 }
 
@@ -172,7 +172,7 @@ void run_server(struct ctrl_blk *cb)
 	clock_gettime(CLOCK_REALTIME, &start);
 	while(1) {
 		for(i = 0; i < NUM_CLIENTS; i++) {
-			//usleep(200000);
+			// usleep(200000);
 			if((num_resp & M_1_) == M_1_ && num_resp > 0 && num_resp != last_resp) {
 				clock_gettime(CLOCK_REALTIME, &end);
 				double seconds = (end.tv_sec - start.tv_sec) +
@@ -211,7 +211,7 @@ void run_server(struct ctrl_blk *cb)
 			// pipeline slot. The new request will get pushed into this slot.
 			// Process the output *before* pushing the new request in.
 
-			//Is the output legit?
+			// Is the output legit?
 			if(pipeline_out->req_type != DUMMY_TYPE && pipeline_out->req_type != EMPTY_TYPE) {	
 				int cn = pipeline_out->cn & 0xff;
 				int ras = pipeline_out->req_area_slot;
@@ -281,7 +281,7 @@ void run_server(struct ctrl_blk *cb)
 	return;
 }
 
-//Post a recv() for a send() from server sn
+// Post a recv() for a send() from server sn
 void post_recv(struct ctrl_blk *cb, int iter_, int sn)
 {
 	struct ibv_sge list = {
@@ -320,24 +320,24 @@ void run_client(struct ctrl_blk *cb)
 	int ret, iter = 0, sn = -1;
 	int num_resp = 0, num_req = 0, wait_cycles = 0, num_fails = 0;
 
-	int num_req_arr[NUM_SERVERS];	//Required to find request offset at server
+	int num_req_arr[NUM_SERVERS];	// Required to find request offset at server
 	memset(num_req_arr, 0, NUM_SERVERS * sizeof(int));
 
-	int num_resp_arr[NUM_SERVERS];	//Required to poll the NUM_SERVERS recv Qs
+	int num_resp_arr[NUM_SERVERS];	// Required to poll the NUM_SERVERS recv Qs
 	memset(num_resp_arr, 0, NUM_SERVERS * sizeof(int));
 
-	int sn_arr[WINDOW_SIZE];		//required for polling for recv comps
+	int sn_arr[WINDOW_SIZE];		// Required for polling for recv comps
 	memset(sn_arr, 0, WINDOW_SIZE * sizeof(int));
 	
-	LL pndng_keys[WINDOW_SIZE];		//The keys for which a response is pending
+	LL pndng_keys[WINDOW_SIZE];		// The keys for which a response is pending
 	memset(pndng_keys, 0, WINDOW_SIZE * sizeof(LL));
 
-	//Generate the keys to be requested
+	// Generate the keys to be requested
 	int key_i = 0;
 	srand48(cb->id);
 	LL *key_corpus = gen_key_corpus(cb->id);
 
-	//Pre-post some RECVs in slot order for the servers
+	// Pre-post some RECVs in slot order for the servers
 	int serv_i;
 	for(serv_i = 1; serv_i < NUM_SERVERS; serv_i ++) {
 		int recv_i;
@@ -347,7 +347,7 @@ void run_client(struct ctrl_blk *cb)
 	}
 
 	for(iter = 0; iter < NUM_ITER; iter++) {
-		//usleep(200000);
+		// usleep(200000);
 		int iter_ = iter & WINDOW_SIZE_;
 		volatile struct KV *req_kv = &client_req_area[iter_];
 		// Performance measurement
@@ -371,7 +371,7 @@ void run_client(struct ctrl_blk *cb)
 			clock_gettime(CLOCK_REALTIME, &start);
 		}
 
-		//First, we PUT all our keys.
+		// First, we PUT all our keys.
 		if(rand() % 100 <= PUT_PERCENT || iter < NUM_KEYS) {
 			req_kv->key[0] = key_corpus[key_i];
 			#if(KEY_SIZE == 2)
@@ -428,11 +428,11 @@ void run_client(struct ctrl_blk *cb)
 		num_req ++;
 
 		if(num_req - num_resp == WINDOW_SIZE) {
-			int rws = num_resp & WINDOW_SIZE_;		//Response window slot
-			int rsn = sn_arr[rws];					//Response server number
+			int rws = num_resp & WINDOW_SIZE_;		// Response window slot
+			int rsn = sn_arr[rws];					// Response server number
 			int ras = (rsn * WINDOW_SIZE) + (num_resp_arr[rsn] & WINDOW_SIZE_);
 
-			//Poll for the recv
+			// Poll for the recv
 			int recv_comps = 0;
 			while(recv_comps == 0) {
 				wait_cycles ++;
@@ -447,7 +447,7 @@ void run_client(struct ctrl_blk *cb)
 				exit(0);
 			}
 		
-			//If it was a GET, and it succeeded, check it!
+			// If it was a GET, and it succeeded, check it!
 			if(pndng_keys[rws] != 0) {
 				if(client_resp_area[ras].kv.len < GET_FAIL_LEN_1) {
 					if(!valcheck(client_resp_area[ras].kv.value, 
@@ -464,10 +464,10 @@ void run_client(struct ctrl_blk *cb)
 				num_fails ++;
 			}
 			
-			//Batched posting of RECVs
+			// Batched posting of RECVs
 			num_resp_arr[rsn] ++;
 
-			//Recvs depleted: post some more.
+			// Recvs depleted: post some more.
 			if((num_resp_arr[rsn] & CL_SEMI_BTCH_SZ_) == 0) {
 				int recv_i;
 				for(recv_i = 0; recv_i < CL_SEMI_BTCH_SZ; recv_i ++) {
@@ -504,7 +504,7 @@ int main(int argc, char *argv[])
 	struct ibv_device *ib_dev;
 	struct ctrl_blk *ctx;
 
-	srand48(getpid() * time(NULL));		//Required for PSN
+	srand48(getpid() * time(NULL));		// Required for PSN
 	ctx = malloc(sizeof(struct ctrl_blk));
 	
 	ctx->id = atoi(argv[1]);
@@ -582,7 +582,7 @@ int main(int argc, char *argv[])
 		server_exch_dest(ctx);
 	}
 
-	//Create address handles
+	// The server creates address handles for every clients' UD QP
 	if(!ctx->is_client) {
 		for(i = 0; i < NUM_CLIENTS; i++) {
 			fprintf(stderr, "Server %d: create_ah for client %d\n", ctx->id, i);

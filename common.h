@@ -115,7 +115,7 @@ struct UD_KV {
 #define GET_FAIL_LEN_1 20001	// Denotes GET failure in pipeline stage 1
 #define GET_FAIL_LEN_2 20002	// Denotes GET failure in pipeline stage 2
 
-//PIpeline ITem
+// PIpeline ITem
 struct PL_IT {
 	struct KV *kv;
 	int cn;				// Client who sent the KV
@@ -236,9 +236,9 @@ int is_roce(void);
 inline uint32_t fastrand(uint64_t* seed);
 
 #define LL long long
-#define KEY_TO_BUCKET(k) ((int) (k >> 16) & NUM_IDX_BKTS_)		//3 bytes (up to 16 meg buckets)
-#define KEY_TO_TAG(k) ((int) (k & 0xffff))						//2 bytes
-#define KEY_TO_SERVER(k) ((int) ((k >> 40) % (NUM_SERVERS - 1) + 1))	//DO NOT shift by 48
+#define KEY_TO_BUCKET(k) ((int) (k >> 16) & NUM_IDX_BKTS_)		// 3 bytes (up to 16 Mi buckets)
+#define KEY_TO_TAG(k) ((int) (k & 0xffff))						// 2 bytes
+#define KEY_TO_SERVER(k) ((int) ((k >> 40) % (NUM_SERVERS - 1) + 1))	// DO NOT shift by 48
 
 #define SLOT_TO_OFFSET(s) (s >> 16)
 #define SLOT_TO_TAG(s) ((int) (s & 0xffff))

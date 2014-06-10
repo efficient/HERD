@@ -122,7 +122,7 @@ void client_exch_dest(struct ctrl_blk *cb)
 		fprintf(stderr, "Client %d <-- Server %d's stag: ", cb->id, i);
 		print_stag(server_req_area_stag[i]);
 	
-		//Exchange attributes for connected QPs
+		// Exchange attributes for connected QPs
 		if(write(sockfd, &cb->local_conn_qp_attrs[i], S_QPA) < 0) {
 			fprintf(stderr, "ERROR writing conn qp_attr to socket\n");
 		}
@@ -135,8 +135,8 @@ void client_exch_dest(struct ctrl_blk *cb)
 		fprintf(stderr, "Client %d <-- Server %d's conn qp_attr: ", cb->id, i);
 		print_qp_attr(cb->remote_conn_qp_attrs[i]);
 		
-		//Exchange attributes for datagram QPs
-		//The client sends a different UD QP to each server
+		// Exchange attributes for datagram QPs
+		// The client sends a different UD QP to each server
 		if(write(sockfd, &cb->local_dgram_qp_attrs[i], S_QPA) < 0) {
 			fprintf(stderr, "ERROR writing dgram qp_attr to socket\n");
 		}
@@ -184,7 +184,7 @@ void server_exch_dest(struct ctrl_blk *cb)
 			exit(1);
 		}
 
-		//Exchange stag information
+		// Exchange stag information
 		server_req_area_stag[0].buf = (uint64_t) (unsigned long) 
 			server_req_area;
 		server_req_area_stag[0].rkey = server_req_area_mr->rkey;
@@ -196,7 +196,7 @@ void server_exch_dest(struct ctrl_blk *cb)
 		fprintf(stderr, "Server %d --> Client %d stag: ", cb->id, i);
 		print_stag(server_req_area_stag[0]);
 
-		//Exchange attributes for connected QPs
+		// Exchange attributes for connected QPs
 		if(read(newsockfd, &cb->remote_conn_qp_attrs[i], S_QPA) < 0) {
 			fprintf(stderr, "ERROR reading conn qp_attr from socket\n");
 		}
@@ -215,7 +215,7 @@ void server_exch_dest(struct ctrl_blk *cb)
 		fprintf(stderr, "Server %d --> Client %d conn qp_attr: ", cb->id, i);
 		print_qp_attr(cb->local_conn_qp_attrs[i]);
 
-		//The server reads many clients' UD qp_attrs
+		// The server reads many clients' UD qp_attrs
 		if(read(newsockfd, &cb->remote_dgram_qp_attrs[i], S_QPA) < 0) {
 			fprintf(stderr, "ERROR reading dgram qp_attr from socket\n");
 		}

@@ -66,7 +66,7 @@ void create_qp(struct ctrl_blk *ctx)
 {
 	int i;
 
-	//Create connected queue pairs
+	// Create connected queue pairs
 	ctx->conn_qp = malloc(sizeof(int *) * ctx->num_conn_qps);
 	ctx->conn_cq = malloc(sizeof(int *) * ctx->num_conn_qps);
 
@@ -91,7 +91,7 @@ void create_qp(struct ctrl_blk *ctx)
 		CPE(!ctx->conn_qp[i], "Couldn't create connected QP", 0);
 	}
 
-	//Create datagram queue pairs
+	// Create datagram queue pairs
 	ctx->dgram_qp = malloc(sizeof(int *) * ctx->num_local_dgram_qps);
 	ctx->dgram_cq = malloc(sizeof(int *) * ctx->num_local_dgram_qps);
 
@@ -403,7 +403,7 @@ LL* gen_key_corpus(int cn)
 
 void init_ht(struct ctrl_blk *cb)
 {
-	int bkt_i, slot_i;				//Indices for buckets and slots
+	int bkt_i, slot_i;				// Indices for buckets and slots
 	int shm_flags = IPC_CREAT | 0666;
 	if(USE_HUGEPAGE) {
 		shm_flags |= SHM_HUGETLB;
