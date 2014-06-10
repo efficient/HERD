@@ -10,9 +10,9 @@ This version of HERD has been tested for the following configuration:
   * RDMA drivers: `mlx4` from MLNX OFED 2.2. I suggest using the MLNX OFED version for Ubuntu 12.04.
 2. Hardware
   * RNICs: 
-    * ConnectX-3 353A (InfiniBand) with PCIe 2.0 x8
-	* ConnectX-3 313A (RoCE) with PCIe 2.0 x8
-	* ConnectX-3 354A (InfiniBand) with PCIe 3.0 x8
+    * ConnectX-3 353A (InfiniBand)
+	* ConnectX-3 313A (RoCE)
+	* ConnectX-3 354A (InfiniBand)
 
 Initial setup:
 -------------
@@ -24,7 +24,7 @@ Initial setup:
 	`num_processes` is the number of client processes per machine, defined in
 	`run-machine.sh`.
   * To modify HERD for your machine names: 
-    * Make appropriate changes in `bomb.sh` and `run-servers.sh`.
+    * Make appropriate changes in `kill-remote.sh` and `run-servers.sh`.
 	* Change the server's machine name in the `servers` file. Clients use this file to
 	  connect to server processes.
 
