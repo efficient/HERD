@@ -152,12 +152,12 @@ void run_server(struct ctrl_blk *cb)
 
 	int i, ret = 0, num_resp = 0;
 	int last_resp = -1;
-	struct timespec start, end;
+	struct timespec start, end;		// Timers for throughput
 	
 	int req_lo[NUM_CLIENTS];		// Base request index for each client
 	int req_num[NUM_CLIENTS];		// Offset above the base index
 
-	int failed_polls = 0;
+	int failed_polls = 0;			// # of failed attempts to find a new request
 	init_ht(cb);
 
 	for(i = 0; i < 2; i++) {
@@ -183,6 +183,7 @@ void run_server(struct ctrl_blk *cb)
 				last_resp = num_resp;
 			}
 
+			// Poll for a new request
 			int req_ind = req_lo[i] + (req_num[i] & WINDOW_SIZE_);
 			if((char) server_req_area[req_ind].key[KEY_SIZE - 1] == 0) {
 				failed_polls ++;
@@ -309,8 +310,8 @@ void run_client(struct ctrl_blk *cb)
 	struct ibv_send_wr *bad_send_wr;
 	struct ibv_wc wc[WS_SERVER];
 	
-	struct timespec start, end;
-	struct timespec op_start[WINDOW_SIZE], op_end[WINDOW_SIZE];
+	struct timespec start, end;		// Throughput timers
+	struct timespec op_start[WINDOW_SIZE], op_end[WINDOW_SIZE];	// Latency timers
 	uint64_t fastrand_seed = 0xdeadbeef;
 	LL total_nsec = 0;
 
@@ -320,12 +321,14 @@ void run_client(struct ctrl_blk *cb)
 	int ret, iter = 0, sn = -1;
 	int num_resp = 0, num_req = 0, wait_cycles = 0, num_fails = 0;
 
-	int num_req_arr[NUM_SERVERS];	// Required to find request offset at server
+	// Number of pending requests and responses received from each server
+	int num_req_arr[NUM_SERVERS];	
 	memset(num_req_arr, 0, NUM_SERVERS * sizeof(int));
 
-	int num_resp_arr[NUM_SERVERS];	// Required to poll the NUM_SERVERS recv Qs
+	int num_resp_arr[NUM_SERVERS];	
 	memset(num_resp_arr, 0, NUM_SERVERS * sizeof(int));
 
+	// The server contacted and the key used in a window slot
 	int sn_arr[WINDOW_SIZE];		// Required for polling for recv comps
 	memset(sn_arr, 0, WINDOW_SIZE * sizeof(int));
 	
@@ -350,6 +353,7 @@ void run_client(struct ctrl_blk *cb)
 		// usleep(200000);
 		int iter_ = iter & WINDOW_SIZE_;
 		volatile struct KV *req_kv = &client_req_area[iter_];
+
 		// Performance measurement
 		if((iter & M_1_) == M_1_ && iter != 0) {
 			fprintf(stderr, "\nClient %d completed %d ops\n", cb->id, iter);
@@ -421,6 +425,8 @@ void run_client(struct ctrl_blk *cb)
 
 		cb->wr.wr.rdma.rkey = server_req_area_stag[0].rkey;
 
+		// Although each client has NUM_SERVERS conn_qps, they only issue RDMA
+		// WRITEs to the 0th server
 		ret = ibv_post_send(cb->conn_qp[0], &cb->wr, &bad_send_wr);
 		CPE(ret, "ibv_post_send error", ret);
 
@@ -550,6 +556,7 @@ int main(int argc, char *argv[])
 
 	union ibv_gid my_gid= get_gid(ctx->context);
 
+	// Collect local queue pair attributes
 	for(i = 0; i < ctx->num_conn_qps; i++) {
 		ctx->local_conn_qp_attrs[i].gid_global_interface_id = 
 			my_gid.global.interface_id;
@@ -576,6 +583,7 @@ int main(int argc, char *argv[])
 		print_qp_attr(ctx->local_dgram_qp_attrs[i]);
 	}
 
+	// Exchange queue pair attributes
 	if(ctx->is_client) {
 		client_exch_dest(ctx);
 	} else {
@@ -611,6 +619,8 @@ int main(int argc, char *argv[])
 	}
 
 	modify_dgram_qp_to_rts(ctx);
+
+	// Move the client's connected QPs through RTR and RTS stages
 	if (ctx->is_client) {
 		for(i = 0; i < NUM_SERVERS; i++) {
 			if(connect_ctx(ctx, ctx->local_conn_qp_attrs[i].psn, 

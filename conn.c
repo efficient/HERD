@@ -1,5 +1,6 @@
 #include "common.h"
 
+// Transition all UD QPs to RTS
 int modify_dgram_qp_to_rts(struct ctrl_blk *ctx)
 {
 	int i;
@@ -26,6 +27,7 @@ int modify_dgram_qp_to_rts(struct ctrl_blk *ctx)
 	return 0;
 }
 
+// Transition connected QP indexed qp_i through RTR and RTS stages
 int connect_ctx(struct ctrl_blk *ctx, int my_psn, struct qp_attr dest,
 	int qp_i)
 {
@@ -85,6 +87,7 @@ int connect_ctx(struct ctrl_blk *ctx, int my_psn, struct qp_attr dest,
 	return 0;
 }
 
+// Get server's request region STAG. Exchange queue pair attributes.
 void client_exch_dest(struct ctrl_blk *cb)
 {
 	int sockfd, i, sock_port;
@@ -94,6 +97,7 @@ void client_exch_dest(struct ctrl_blk *cb)
 	char server_name[20],sock_port_str[20];
 
 	for(i = 0; i < NUM_SERVERS; i++) {
+		// Find the server name and port from the "servers" file
 		scanf("%s", server_name);
 		scanf("%s", sock_port_str);
 		printf("At client %d, server_name = %s, port = %s\n", cb->id, 
@@ -116,6 +120,7 @@ void client_exch_dest(struct ctrl_blk *cb)
 			fprintf(stderr, "ERROR connecting\n");
 		}
 
+		// Get STAG
 		if(read(sockfd, &server_req_area_stag[i], S_STG) < 0) {
 			fprintf(stderr, "ERROR reading stag from socket\n");
 		}
@@ -135,7 +140,7 @@ void client_exch_dest(struct ctrl_blk *cb)
 		fprintf(stderr, "Client %d <-- Server %d's conn qp_attr: ", cb->id, i);
 		print_qp_attr(cb->remote_conn_qp_attrs[i]);
 		
-		// Exchange attributes for datagram QPs
+		// Send datagram QP attrs. Clients don't need server's UD QP attrs
 		// The client sends a different UD QP to each server
 		if(write(sockfd, &cb->local_dgram_qp_attrs[i], S_QPA) < 0) {
 			fprintf(stderr, "ERROR writing dgram qp_attr to socket\n");
@@ -147,6 +152,7 @@ void client_exch_dest(struct ctrl_blk *cb)
 	}
 }
 
+// Exchange QP information with clients
 void server_exch_dest(struct ctrl_blk *cb)
 {
 	int sockfd, newsockfd, i;
