@@ -67,7 +67,7 @@ Quick start:
 ./run-machine.sh (i - 2)
 ```
 
-* To kill the server processes, run `kill-local.sh` at the server machine. To kill the 
+* To kill the server processes, run `local-kill.sh` at the server machine. To kill the 
 client processes remotely, run `kill-remote.sh` at the server machine.
 
 
