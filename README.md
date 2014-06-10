@@ -37,7 +37,7 @@ cd ~
 git clone https://github.com/anujkaliaiitd/HERD.git
 export PATH=~/HERD/scripts:$PATH
 cd HERD
-sudo ./init.sh	# Increase shmmax and shmall
+sudo ./shm-init.sh	# Increase shmmax and shmall
 sudo hugepages-create.sh 0 4096		# Create hugepages on socket 0. Do for all sockets.
 ```
 
@@ -67,9 +67,8 @@ Quick start:
 ./run-machine.sh (i - 2)
 ```
 
-* To kill the server processes, run `kill.sh` at the server machine. To kill the 
-client processes remotely, run `bomb.sh` at the server machine.
-
+* To kill the server processes, run `kill-local.sh` at the server machine. To kill the 
+client processes remotely, run `kill-remote.sh` at the server machine.
 
 
 <!---
