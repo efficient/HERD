@@ -1,0 +1,25 @@
+Test:
+* Generate 20 million zipf .99 numbers and slot them into 64 buckets
+* Print percetile weights of buckets
+
+1 buckets of 64 comprise 5 percent of samples
+3 buckets of 64 comprise 10 percent of samples
+5 buckets of 64 comprise 15 percent of samples
+8 buckets of 64 comprise 20 percent of samples
+11 buckets of 64 comprise 25 percent of samples
+14 buckets of 64 comprise 30 percent of samples
+17 buckets of 64 comprise 35 percent of samples
+20 buckets of 64 comprise 40 percent of samples
+23 buckets of 64 comprise 45 percent of samples
+27 buckets of 64 comprise 50 percent of samples
+30 buckets of 64 comprise 55 percent of samples
+34 buckets of 64 comprise 60 percent of samples
+37 buckets of 64 comprise 65 percent of samples
+41 buckets of 64 comprise 70 percent of samples
+45 buckets of 64 comprise 75 percent of samples
+49 buckets of 64 comprise 80 percent of samples
+53 buckets of 64 comprise 85 percent of samples
+57 buckets of 64 comprise 90 percent of samples
+61 buckets of 64 comprise 95 percent of samples
+64 buckets of 64 comprise 100 percent of samples
+
