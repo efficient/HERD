@@ -13,10 +13,13 @@ public class zipf {
 		
 		PrintWriter out[] = new PrintWriter[NUM_CLIENTS];
 		for (int i = 0; i < NUM_CLIENTS; i++) {
-			String filename = "/dev/zipf/data"+i+".dat";
+			String filename = "/dev/zipf/data" + i + ".dat";
 			out[i] = new PrintWriter(new File(filename));	
 		}
-		ScrambledZipfianGenerator gen = new ScrambledZipfianGenerator(0, Long.MAX_VALUE, .99);
+
+		ScrambledZipfianGenerator gen = new ScrambledZipfianGenerator(0,
+			Long.MAX_VALUE, .99);
+
 		int N = 1 * 1024 * 1024;
 		for (int cn = 0; cn < NUM_CLIENTS; cn++) {
 			for (int i = 0; i < N; i++) {
@@ -26,11 +29,12 @@ public class zipf {
 					i --;
 					continue;
 				}
-				Freq[(int)((num >> 40) % (NUM_SERVERS -1)) + 1] ++;
+				Freq[(int)((num >> 40) % (NUM_SERVERS - 1)) + 1] ++;
 				out[cn].println(num);
 			}
-			System.out.println("Done for client "+cn);
+			System.out.println("Done for client " + cn);
 		}
+
 		Arrays.sort(Freq);
 		System.out.println(Arrays.toString(Freq));
 		for (int cn = 0; cn < NUM_CLIENTS; cn++) {
