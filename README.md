@@ -1,7 +1,9 @@
 HERD
 ====
 
-A Highly Efficient key-value system for RDMA
+A Highly Efficient key-value system for RDMA.  The
+original [paper describing HERD](http://dl.acm.org/citation.cfm?id=2626299)
+appeared in *SIGCOMM'14*.
 
 This version of HERD has been tested for the following configuration:
 
