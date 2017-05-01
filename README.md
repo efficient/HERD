@@ -5,7 +5,8 @@ A Highly Efficient key-value system for RDMA.  The
 original [paper describing HERD](http://dl.acm.org/citation.cfm?id=2626299)
 appeared in *SIGCOMM'14*.
 
-**Important: Please use the new and improved (up to 83% faster) version of HERD from our
+**Important: This code is not maintained anymore. Please use the new and improved
+(up to 83% faster) version of HERD from our
 [USENIX ATC 16 paper](https://www.usenix.org/system/files/conference/atc16/atc16_paper-kalia.pdf).
 The code is available [here](https://github.com/efficient/rdma_bench/tree/master/herd).**
 
